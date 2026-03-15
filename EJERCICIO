@@ -1,0 +1,49 @@
+import tkinter as tk
+from tkinter import messagebox
+
+# Función para agregar tarea
+def agregar():
+    tarea = entrada.get()
+
+    if tarea != "":
+        lista.insert(tk.END, tarea)
+        entrada.delete(0, tk.END)
+    else:
+        messagebox.showwarning("Advertencia", "Escriba una tarea")
+
+# Función para limpiar o eliminar
+def limpiar():
+    seleccion = lista.curselection()
+
+    if seleccion:
+        lista.delete(seleccion)
+    else:
+        lista.delete(0, tk.END)
+
+# Ventana principal
+ventana = tk.Tk()
+ventana.title("Lista de Tareas")
+ventana.geometry("400x300")
+
+# Etiqueta
+label = tk.Label(ventana, text="Ingrese una tarea:")
+label.pack(pady=10)
+
+# Campo de texto
+entrada = tk.Entry(ventana, width=30)
+entrada.pack(pady=5)
+
+# Botón agregar
+boton_agregar = tk.Button(ventana, text="Agregar", command=agregar)
+boton_agregar.pack(pady=5)
+
+# Lista de tareas
+lista = tk.Listbox(ventana, width=40, height=10)
+lista.pack(pady=10)
+
+# Botón limpiar
+boton_limpiar = tk.Button(ventana, text="Limpiar / Eliminar", command=limpiar)
+boton_limpiar.pack(pady=5)
+
+# Ejecutar aplicación
+ventana.mainloop()
